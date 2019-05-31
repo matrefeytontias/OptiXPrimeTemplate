@@ -84,6 +84,9 @@ int _main(int, char *argv[])
 	CHK_PRIME(rtpContext, rtpQuerySetHits(rtpQuery, rtpHitDesc));
 	CHK_PRIME(rtpContext, rtpQueryExecute(rtpQuery, 0));
     
+	// Do things with the result
+	Hit *data = hitsBuffer.hostPtr();
+
     // Cleanup
 	rtpContextDestroy(rtpContext);
     
