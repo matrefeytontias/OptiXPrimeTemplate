@@ -85,7 +85,7 @@ int _main(int, char *argv[])
 	CHK_PRIME(rtpContext, rtpQueryExecute(rtpQuery, 0));
     
 	// Do things with the result
-	Hit *data = hitsBuffer.hostPtr();
+	const Hit *data = hitsBuffer.hostPtr();
 
     // Cleanup
 	rtpContextDestroy(rtpContext);
