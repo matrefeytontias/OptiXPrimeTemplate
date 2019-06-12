@@ -20,15 +20,15 @@ if(WIN32)
 	target_compile_definitions(${PROJECT_NAME} PUBLIC NOMINMAX _USE_MATH_DEFINES)
 endif()
 
-add_custom_target(CopyDLLs ALL COMMENT "Copying DLLs"
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different
-		$<TARGET_FILE:optix> $<TARGET_FILE:optix_prime>
-		$<TARGET_FILE_DIR:${PROJECT_NAME}>)
-
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(OptiX REQUIRED)
+
+add_custom_target(CopyDLLs ALL COMMENT "Copying DLLs"
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+		${OPTIX_DLL} $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
 target_link_libraries(${PROJECT_NAME} optix optix_prime)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${BIN_INSTALL_DIR})
