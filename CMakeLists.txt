@@ -13,7 +13,7 @@ file(GLOB_RECURSE ${PROJECT_NAME}_sources "${PROJECT_SOURCE_DIR}/src/*.c*" "${PR
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/src)
-target_include_directories(${PROJECT_NAME} PUBLIC ${OptiX_INCLUDE})
+target_include_directories(${PROJECT_NAME} PUBLIC ${OPTIX_INCLUDE_DIR})
 
 if(WIN32)
 	# Needed for CUDA apparently
@@ -29,6 +29,6 @@ add_custom_target(CopyDLLs ALL COMMENT "Copying DLLs"
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different
 		${OPTIX_DLL} $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
-target_link_libraries(${PROJECT_NAME} optix optix_prime)
+target_link_libraries(${PROJECT_NAME} ${OPTIX_LIB})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${BIN_INSTALL_DIR})
